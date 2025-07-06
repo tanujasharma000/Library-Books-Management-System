@@ -1,86 +1,95 @@
-# Library Books Management System
+# 📚 Library Books Management System  
 
-A command-line project built using Python and MySQL to manage books in a library.  
-Developed by **Tanuja Sharma** | BCA 2nd Semester
+A Python command-line application for managing library books and tracking issuances using MySQL.  
 
----
-
-## Features
-
-- Add new books
-- Display all books
-- Search books by title or author
-- Sort books by title or author
-- Update book information
-- Delete books (only if not currently issued)
-- Issue books to a person
-- Return issued books
-- Show all issued books
-- Show issued summary (person-wise)
-- Generate report (total, issued, available)
-- Add more copies to an existing book
+**Developer**: Tanuja Sharma | BCA 2nd Semester  
+**Latest Update**: Implemented secure database credential handling  
 
 ---
 
-## Tech Stack
-
-- **Programming Language:** Python 3.x  
-- **Database:** MySQL  
-- **Connector:** mysql-connector-python
-
----
-
-Project Structure
-
-main_.py – Main menu and user options
-
-books_operations.py – Handles all book-related operations (add, delete, search, sort)
-
-issued_books.py – Issue, return, summary, and report generation for issued books
-
-db_connect2.py – MySQL database connection setup
-
-README.md – Project documentation
-
+## ✨ Features  
+### Book Operations  
+- Add new books & update existing  
+- Search/sort by title/author  
+- Delete books (only if not issued)  
+- Add copies to existing books  
+### Issuance Management  
+- Issue/return books with date tracking  
+- View issued books (person-wise summary)  
+### Reporting  
+- Generate reports: total/issued/available books  
 
 ---
 
-## How to Run
+## ⚙️ Tech Stack  
+- **Backend**: Python 3  
+- **Database**: MySQL  
+- **Dependencies**:  
+  ```bash
+  mysql-connector-python 
+  python-dotenv  # For secure credentials
+  
+🗂️ Project Structure
 
-### Prerequisites
+File	and Purpose
 
-- Python 3.x
-- MySQL Server installed and running
-- Install connector library using:
+main.py ->	Main application menu
 
-```bash
-pip install mysql-connector-python
-Steps to Run
-Create a MySQL database (e.g., library_db) and required tables (books, issued_books)
+books_operations.py ->	Book CRUD operations
 
-Update database credentials in db_connect2.py
+issued_books.py ->	Handle issuances/returns/reports
 
-Run the main script:
+db_connect2.py ->	Secure database connection setup
+
+.env ->Stores credentials (gitignored)
+
+
+🚀 Setup Guide
+
+1. Database Preparation
+   
+sql
+
+CREATE DATABASE library_db;
+
+USE library_db;
+
+CREATE TABLE books (
+    book_id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    total_copies INT NOT NULL,
+    available_copies INT NOT NULL
+);
+
+CREATE TABLE issued_books (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    book_id INT NOT NULL,
+    issued_to VARCHAR(255) NOT NULL,
+    issue_date DATE NOT NULL,
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+);
+
+2. Configure Environment
+   
+Create .env file:
+
+ini
+DB_HOST="localhost"
+DB_USER="root"
+DB_PASSWORD="your_actual_password"  
+DB_NAME="library_db"
+
+Add to .gitignore:
+
+.gitignore
+
+.env
+__pycache__/
+3. Install & Run
+bash
+# Install dependencies
+pip install mysql-connector-python python-dotenv
+
+# Run application
 python main.py
-
-
-# MySQL Table Schema
--books
-Column	and Type
-book_id (PK)	INT AUTO_INCREMENT
-title	VARCHAR(255)
-author	VARCHAR(255)
-total_copies	INT
-available_copies	INT
-
--issued_books
-Column	and Type
-id (PK)	INT AUTO_INCREMENT
-book_id (FK)	INT
-issued_to	VARCHAR(255)
-issue_date	DATE
-
-Author
-Tanuja Sharma 
-BCA Student exploring backend development using Python and MySQL
-
