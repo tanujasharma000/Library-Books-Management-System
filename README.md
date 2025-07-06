@@ -89,7 +89,9 @@ Add to .gitignore:
 .gitignore
 
 .env
+
 __pycache__/
+
 3. Install & Run
 bash
 # Install dependencies
