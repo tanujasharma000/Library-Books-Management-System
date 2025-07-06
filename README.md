@@ -75,9 +75,13 @@ CREATE TABLE issued_books (
 Create .env file:
 
 ini
+
 DB_HOST="localhost"
+
 DB_USER="root"
+
 DB_PASSWORD="your_actual_password"  
+
 DB_NAME="library_db"
 
 Add to .gitignore:
